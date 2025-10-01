@@ -3,8 +3,9 @@ import React from 'react';
 function LoginPage() {
 
   const handleLogin = () => {
+    const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
     // Redirect the user to our backend, which will then redirect to the ABHA server.
-    window.location.href = 'http://localhost:8000/auth/login';
+    window.location.href = `${apiUrl}/auth/login`;
   };
 
   return (
