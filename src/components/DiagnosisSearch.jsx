@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // Import useParams
 import DiagnosisCard from './DiagnosisCard';
 
-const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
 
 const SearchIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -37,7 +37,7 @@ const DiagnosisSearch = () => {
     }
     setLoadingSearch(true);
     const timerId = setTimeout(() => {
-      fetch(`${apiUrl}/search?term=${searchTerm}`)
+      fetch(`/search?term=${searchTerm}`)
         .then(res => {
           if (!res.ok) throw new Error('Search failed');
           return res.json();
@@ -56,7 +56,7 @@ const DiagnosisSearch = () => {
     setTranslation(null);
     setConfirmStatus('');
     try {
-      const response = await fetch(`${apiUrl}/translate`, {
+      const response = await fetch(`/translate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ namaste_code: diagnosis.code }),
@@ -81,7 +81,7 @@ const DiagnosisSearch = () => {
     setConfirmStatus('');
 
     try {
-      const response = await fetch(`${apiUrl}/diagnosis/confirm`, {
+      const response = await fetch(`/diagnosis/confirm`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // Send session cookie
