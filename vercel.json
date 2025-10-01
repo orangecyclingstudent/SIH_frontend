@@ -1,5 +1,12 @@
 {
   "rewrites": [
+    { "source": "/api/:path*", "destination": "https://accura-backend.onrender.com/api/:path*" },
+    { "source": "/auth/:path*", "destination": "https://accura-backend.onrender.com/auth/:path*" },
+    { "source": "/consent/:path*", "destination": "https://accura-backend.onrender.com/consent/:path*" },
+    { "source": "/diagnosis/:path*", "destination": "https://accura-backend.onrender.com/diagnosis/:path*" },
+    { "source": "/terminology/:path*", "destination": "https://accura-backend.onrender.com/terminology/:path*" },
+    { "source": "/search", "destination": "https://accura-backend.onrender.com/search" },
+    { "source": "/translate", "destination": "https://accura-backend.onrender.com/translate" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
