@@ -15,10 +15,11 @@ const DiagnosisCard = ({ diagnosis, isSelected, onSelect, showSelectButton }) =>
   return (
     <div className={cardClasses}>
       <div>
-        <h3 className="font-semibold text-gray-800">{diagnosis.name}</h3>
-        <p className="text-sm text-gray-500">
-          {diagnosis.date ? `Diagnosed on: ${diagnosis.date}` : `ICD-11 CODE : ${diagnosis.code}`}
-        </p>
+        <h3 class="font-semibold text-gray-800">{diagnosis.term}</h3>
+        <div class="text-sm text-gray-500 mt-1">
+          <div><span class="font-medium">NAMASTE Code:</span> {diagnosis.code}</div>
+          <div>{diagnosis.short_definition}</div>
+        </div>
       </div>
       <div className="flex items-center space-x-4">
         <button className="p-1 bg-transparent border-0 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">

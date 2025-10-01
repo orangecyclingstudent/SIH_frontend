@@ -4,14 +4,22 @@ import LoginPage from './pages/LoginPage';
 import ConsentPage from './pages/ConsentPage';
 import ActivePatientsPage from './pages/ActivePatientsPage';
 import PatientRecordPage from './pages/PatientRecordPage';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import PatientConsentSuccessPage from './pages/PatientConsentSuccessPage.jsx';
 
 function App() {
   return (
     <Routes>
+      {/* Public Route */}
       <Route path="/" element={<LoginPage />} />
-      <Route path="/dashboard" element={<ActivePatientsPage />} />
-      <Route path="/add-patient" element={<ConsentPage />} />
-      <Route path="/patient/:id" element={<PatientRecordPage />} />
+
+      {/* Protected Routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<ActivePatientsPage />} />
+        <Route path="/add-patient" element={<ConsentPage />} />
+        <Route path="/add-patient/success" element={<PatientConsentSuccessPage />} />
+        <Route path="/patient/:id" element={<PatientRecordPage />} />
+      </Route>
     </Routes>
   );
 }

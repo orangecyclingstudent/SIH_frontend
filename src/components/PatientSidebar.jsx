@@ -1,13 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-const patientData = {
-  name: 'Khushi Vraj Doshi',
-  avatarUrl: 'https://placehold.co/150x150/E2F3F0/4A5568?text=KV',
-  abhaId: 'XX-XXXX-XXXX-1293',
-  gender: 'Female',
-  age: 27,
-};
+import { Link, useParams } from 'react-router-dom';
+import { usePatients } from '../context/PatientContext';
 
 const BackArrowIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -16,6 +9,10 @@ const BackArrowIcon = () => (
 );
 
 const PatientSidebar = ({ activeView, setActiveView }) => {
+    const { id } = useParams();
+    const { patients } = usePatients();
+    const patient = patients.find(p => p.id === id);
+
     const navButtonClasses = (viewName) => `
         w-full text-left p-3 rounded-lg border flex justify-between items-center transition-colors duration-200
         ${activeView === viewName 
@@ -23,28 +20,39 @@ const PatientSidebar = ({ activeView, setActiveView }) => {
             : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}
     `;
 
+    if (!patient) {
+        return (
+            <aside className="w-1/4 max-w-sm bg-white p-6 border-r border-gray-200 flex flex-col justify-center items-center">
+                <h2 className="text-xl font-bold text-red-600">Patient Not Found</h2>
+                <Link to="/dashboard" className="mt-4 text-teal-500 hover:underline">
+                    Return to Dashboard
+                </Link>
+            </aside>
+        );
+    }
+
   return (
     <aside className="w-1/4 max-w-sm bg-white p-6 border-r border-gray-200 flex flex-col space-y-8">
       <div className="text-center">
         <img
-          src={patientData.avatarUrl}
-          alt={patientData.name}
+          src={patient.avatarUrl}
+          alt={patient.name}
           className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-teal-100"
         />
-        <h2 className="text-xl font-bold text-gray-800">{patientData.name}</h2>
+        <h2 className="text-xl font-bold text-gray-800">{patient.name}</h2>
       </div>
       <div className="space-y-3 text-sm">
         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
           <span className="font-semibold text-gray-600">Abha ID</span>
-          <span className="text-gray-800">{patientData.abhaId}</span>
+          <span className="text-gray-800">{patient.abhaId}</span>
         </div>
         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
           <span className="font-semibold text-gray-600">Gender</span>
-          <span className="text-gray-800">{patientData.gender}</span>
+          <span className="text-gray-800">{patient.gender}</span>
         </div>
         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
           <span className="font-semibold text-gray-600">Age</span>
-          <span className="text-gray-800">{patientData.age}</span>
+          <span className="text-gray-800">{patient.age}</span>
         </div>
       </div>
       <nav className="flex-grow space-y-4">
