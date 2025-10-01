@@ -7,6 +7,7 @@ const PatientHistory = () => {
   const [history, setHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     if (!patientId) return;
@@ -15,7 +16,7 @@ const PatientHistory = () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch(`http://localhost:8000/diagnosis/history/${patientId}`, {
+        const response = await fetch(`${apiUrl}/diagnosis/history/${patientId}`, {
           credentials: 'include', // Use cookie-based auth as per project convention
         });
         if (!response.ok) {
