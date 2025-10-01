@@ -2,9 +2,7 @@ import React from 'react';
 
 const ConsentPage = () => {
   const handleConsent = () => {
-    const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
-    // This redirects to our backend, which then redirects to the ABHA server for patient login
-    window.location.href = `${apiUrl}/consent/ask-patient`;
+    window.location.href = '/consent/ask-patient';
   };
 
   return (
